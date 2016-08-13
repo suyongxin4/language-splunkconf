@@ -26,6 +26,22 @@ patterns: [
     name: "entity.name.function"
   }
   {
+    match: "(TRANSFORMS-.+?)=(.+)"
+    comment: "Regular expressions"
+    captures: {
+      1: { name: "entity.name.type" }
+      2: { name: "string" }
+    }
+  }
+  {
+    match: "(REPORT-.+?)=(.+)"
+    comment: "Regular expressions"
+    captures: {
+      1: { name: "support.function" }
+      2: { name: "string" }
+    }
+  }
+  {
     comment: "conf setting key"
     match: "^[\\w+\\.\\-\\:]+"
     name: "support.function"

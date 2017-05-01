@@ -1,6 +1,6 @@
 {
-  "name": "language-splunkconf",
-  "version": "0.5.0",
+  "name": "language-splunk-conf",
+  "version": "0.1.0",
   "description": "Splunk conf file highlighting in Atom",
   "engines": {
     "atom": "*"
@@ -8,10 +8,10 @@
   "dependencies": {},
   "repository": {
     "type": "git",
-    "url": "https://github.com/thejeffreystone/language-splunkconf.git"
+    "url": "https://github.com/suyongxin4/language-splunk-conf"
   },
   "bugs": {
-    "url": "https://github.com/thejeffreystone/language-splunkconf/issues"
+    "url": "https://github.com/suyongxin4/language-splunk-conf/issues"
   },
   "license": "MIT"
 }

@@ -1,0 +1,228 @@
+".source.splunk-conf.props":
+    "priority = <number>":
+        "prefix": "charset"
+        "body": "priority = ${1}"
+        "description": "Overrides the default ASCII ordering of matching stanza names."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "CHARSET = <string:ASCII>":
+        "prefix": "charset"
+        "body": "CHARSET = ${1:ASCII}"
+        "description": "When set, Splunk software assumes the input from the given [<spec>] is in the specified encoding."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "TRUNCATE = <int:10000>":
+        "prefix": "truncate"
+        "body": "TRUNCATE = ${1:10000}"
+        "description": "Change the default maximum line length (in bytes)."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "LINE_BREAKER = <regexp:([\\\\r\\\\n]+)>":
+        "prefix": "line_breaker"
+        "body": "LINE_BREAKER = ${1:([\\\\r\\\\n]+)}"
+        "description": "Specifies a regex that determines how the raw text stream is broken into initial events, before line merging takes place."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "LINE_BREAKER_LOOKBEHIND = <int:100>":
+        "prefix": "line_breaker_lookbehind"
+        "body": "LINE_BREAKER_LOOKBEHIND = ${1:100}"
+        "description": "When there is leftover data from a previous raw chunk, LINE_BREAKER_LOOKBEHIND indicates the number of bytes before the end of the raw chunk (with the next chunk concatenated) that Splunk applies the LINE_BREAKER regex. You may want to increase this value from its default if you are dealing with especially large or multi-line events."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "SHOULD_LINEMERGE = <bool:true>":
+        "prefix": "should_linemerge"
+        "body": "SHOULD_LINEMERGE = ${1:true}"
+        "description": "When set to true, Splunk combines several lines of data into a single multi-line event, based on the following configuration attributes."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "BREAK_ONLY_BEFORE_DATE = <bool:true>":
+        "prefix": "break_only_before_date"
+        "body": "BREAK_ONLY_BEFORE_DATE = ${1:true}"
+        "description": "When set to true, Splunk creates a new event only if it encounters a new line with a date."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "BREAK_ONLY_BEFORE = <regexp>":
+        "prefix": "break_only_before"
+        "body": "BREAK_ONLY_BEFORE = "
+        "description": "When set, Splunk creates a new event only if it encounters a new line that matches the regular expression."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "MUST_BREAK_AFTER = <regexp>":
+        "prefix": "must_break_after"
+        "body": "MUST_BREAK_AFTER = "
+        "description": "When set and the regular expression matches the current line, Splunk creates a new event for the next input line."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "MUST_NOT_BREAK_AFTER = <regexp>":
+        "prefix": "must_not_break_after"
+        "body": "MUST_NOT_BREAK_AFTER = "
+        "description": "When set and the current line matches the regular expression, Splunk does not break on any subsequent lines until the MUST_BREAK_AFTER expression matches."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "MUST_NOT_BREAK_BEFORE = <regexp>":
+        "prefix": "must_not_break_before"
+        "body": "MUST_NOT_BREAK_BEFORE = "
+        "description": "When set and the current line matches the regular expression, Splunk does not break the last event before the current line."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "MAX_EVENTS = <int:256>":
+        "prefix": "max_events"
+        "body": "MAX_EVENTS = ${1:256}"
+        "description": "Specifies the maximum number of input lines to add to any event."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "EVENT_BREAKER_ENABLE = <bool:false>":
+        "prefix": "event_breaker_enable"
+        "body": "EVENT_BREAKER_ENABLE = ${1:false}"
+        "description": "When set to true, Splunk will split incoming data with a light-weight chunked line breaking processor so that data is distributed fairly evenly amongst multiple indexers. Use this setting on the UF to indicate that data should be split on event boundaries across indexers especially for large files."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "EVENT_BREAKER = <regexp>":
+        "prefix": "event_breaker"
+        "body": "EVENT_BREAKER = "
+        "description": "When set, Splunk will use the setting to define an event boundary at the end of the first matching group instance."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "DATETIME_CONFIG = <filename:\/etc\/datetime.xml>":
+        "prefix": "datetime_config"
+        "body": "DATETIME_CONFIG = ${1:\\\/etc\\\/datetime.xml}"
+        "description": "Specifies which file(relative to $SPLUNK_HOME) configures the timestamp extractor, which identifies timestamps from the event text."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "TIME_PREFIX = <regexp>":
+        "prefix": "time_prefix"
+        "body": "TIME_PREFIX = "
+        "description": "If set, splunk scans the event text for a match for this regex in event text before attempting to extract a timestamp."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "MAX_TIMESTAMP_LOOKAHEAD = <int:150>":
+        "prefix": "max_timestamp_lookahead"
+        "body": "MAX_TIMESTAMP_LOOKAHEAD = ${1:150}"
+        "description": "Specifies how far (in characters) into an event Splunk should look for a timestamp."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "TIME_FORMAT = <strptime-style format>":
+        "prefix": "time_format"
+        "body": "TIME_FORMAT = "
+        "description": "Specifies a strptime format string to extract the date."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "TZ = <timezone identifier>":
+        "prefix": "tz"
+        "body": "TZ = "
+        "description": "The algorithm for determining the time zone for a particular event is as follows: If the event has a timezone in its raw text (for example, UTC, -08:00), use that. If TZ is set to a valid timezone string, use that. If the event was forwarded, and the forwarder-indexer connection is using the 6.0+ forwarding protocol, use the timezone provided by the forwarder. Otherwise, use the timezone of the system that is running splunkd."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "TZ_ALIAS = <key=value>[, <key=value>...]":
+        "prefix": "tz_alias"
+        "body": "TZ_ALIAS = ${1:key1}=${2:value1}, ${3:key2}=${4:value2}"
+        "description": "Provides splunk admin-level control over how timezone strings extracted from events are interpreted."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "MAX_DAYS_AGO = <int:2000>":
+        "prefix": "max_days_ago"
+        "body": "MAX_DAYS_AGO = ${1:2000}"
+        "description": "Specifies the maximum number of days in the past, from the current date as provided by input layer(For e.g. forwarder current time, or modtime for files), that an extracted date can be valid. Splunk still indexes events with dates older than MAX_DAYS_AGO with the timestamp of the last acceptable event. If no such acceptable event exists, new events with timestamps older than MAX_DAYS_AGO will use the current timestamp."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "MAX_DAYS_HENCE = <int:2>":
+        "prefix": "max_days_hence"
+        "body": "MAX_DAYS_HENCE = ${1:2}"
+        "description": "Specifies the maximum number of days in the future, from the current date as provided by input layer(For e.g. forwarder current time, or modtime for files), that an extracted date can be valid. Splunk still indexes events with dates more than MAX_DAYS_HENCE in the future with the timestamp of the last acceptable event. If no such acceptable event exists, new events with timestamps after MAX_DAYS_HENCE will use the current timestamp."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "MAX_DIFF_SECS_AGO = <int:3600>":
+        "prefix": "max_diff_secs_ago"
+        "body": "MAX_DIFF_SECS_AGO = ${1:3600}"
+        "description": "This setting prevents Splunk Enterprise from rejecting events with timestamps that are out of order."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "MAX_DIFF_SECS_HENCE = <int:604800>":
+        "prefix": "max_diff_secs_hence"
+        "body": "MAX_DIFF_SECS_HENCE = ${1:604800}"
+        "description": "This setting prevents Splunk Enterprise from rejecting events with timestamps that are out of order."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "INDEXED_EXTRACTIONS = [CSV|W3C|TSV|PSV|JSON]":
+        "prefix": "indexed_extractions"
+        "body": "INDEXED_EXTRACTIONS = "
+        "description": "Tells Splunk the type of file and the extraction and/or parsing method Splunk should use on the file. Candidate values are [CSV|W3C|TSV|PSV|JSON]."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "PREAMBLE_REGEX = <regexp>":
+        "prefix": "preamble_regex"
+        "body": "PREAMBLE_REGEX = "
+        "description": "Some files contain preamble lines. This attribute specifies a regular expression which allows Splunk to ignore these preamble lines, based on the pattern specified."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "FIELD_HEADER_REGEX = <regexp>":
+        "prefix": "field_header_regex"
+        "body": "FIELD_HEADER_REGEX = "
+        "description": "A regular expression that specifies a pattern for prefixed headers. Note that the actual header starts after the pattern and it is not included in the header field."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "HEADER_FIELD_LINE_NUMBER = <int:0>":
+        "prefix": "heaser_field_line_number"
+        "body": "HEADER_FIELD_LINE_NUMBER = ${1:0}"
+        "description": "Tells Splunk the line number of the line within the file that contains the header fields. If set to 0, Splunk attempts to locate the header fields within the file automatically."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "FIELD_DELIMITER = <char>":
+        "prefix": "field_delimiter"
+        "body": "FIELD_DELIMITER = "
+        "description": "Tells Splunk which character delimits or separates fields in the specified file or source."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "HEADER_FIELD_DELIMITER = <char>":
+        "prefix": "header_field_delimiter"
+        "body": "HEADER_FIELD_DELIMITER = "
+        "description": "Tells Splunk which character delimits or separates header fields in the specified file or source."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "FIELD_QUOTE = <char>":
+        "prefix": "field_quote"
+        "body": "FIELD_QUOTE = "
+        "description": "Tells Splunk the character to use for quotes in the specified file or source."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "HEADER_FIELD_QUOTE = <char>":
+        "prefix": "header_field_quote"
+        "body": "HEADER_FIELD_QUOTE = "
+        "description": "Specifies Splunk the character to use for quotes in the header of the specified file or source."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "TIMESTAMP_FIELDS = <string>[,<string>...]":
+        "prefix": "timestamp_fields"
+        "body": "TIMESTAMP_FIELDS = ${1:string1},${2:string2}"
+        "description": "Some CSV and structured files have their timestamp encompass multiple fields in the event separated by delimiters. This attribute tells Splunk to specify all such fields which constitute the timestamp in a comma-separated fashion."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "FIELD_NAMES = <string>[, <string>...]":
+        "prefix": "field_names"
+        "body": "FIELD_NAMES = ${1:string1}, ${2:string2}"
+        "description": "Some CSV and structured files might have missing headers. This attribute tells Splunk to specify the header field names directly."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "MISSING_VALUE_REGEX = <regexp>":
+        "prefix": "missing_value_regex"
+        "body": "MISSING_VALUE_REGEX = "
+        "description": "Tells Splunk the placeholder to use in events where no value is present."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "JSON_TRIM_BRACES_IN_ARRAY_NAMES = <bool:false>":
+        "prefix": "json_trim_braces_in_array_names"
+        "body": "JSON_TRIM_BRACES_IN_ARRAY_NAMES = ${1:false}"
+        "description": "Tell the json parser not to add the curly braces to array names."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "TRANSFORMS-<class> = <stanza_name1>[, <stanza_name2>...]":
+        "prefix": "transforms"
+        "body": "TRANSFORMS-${1:class} = ${2:stanza_name1}, ${3:stanza_name2}"
+        "description": "Used for creating indexed fields (index-time field extractions)"
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "REPORT-<class> = <stanza_name1>[, <stanza_name2>...]":
+        "prefix": "report"
+        "body": "REPORT-${1:class} = ${2:stanza_name1}, ${3:stanza_name2}"
+        "description": "Used for creating extracted fields (search-time field extractions) that reference one or more transforms.conf stanzas."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"

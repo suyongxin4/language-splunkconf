@@ -1,4 +1,8 @@
 fileTypes: [
+    "conf"
+    "conf.example"
+    "conf.default"
+    "conf.spec"
     "conf.in"
     "conf.example.in"
     "conf.spec.in"

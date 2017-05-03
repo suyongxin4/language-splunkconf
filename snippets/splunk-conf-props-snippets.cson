@@ -191,9 +191,9 @@
         "description": "Specifies Splunk the character to use for quotes in the header of the specified file or source."
         "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
 
-    "TIMESTAMP_FIELDS = <string>[,<string>...]":
+    "TIMESTAMP_FIELDS = <string>[, <string>...]":
         "prefix": "timestamp_fields"
-        "body": "TIMESTAMP_FIELDS = ${1:string1},${2:string2}"
+        "body": "TIMESTAMP_FIELDS = ${1:string1}, ${2:string2}"
         "description": "Some CSV and structured files have their timestamp encompass multiple fields in the event separated by delimiters. This attribute tells Splunk to specify all such fields which constitute the timestamp in a comma-separated fashion."
         "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
 
@@ -225,4 +225,183 @@
         "prefix": "report"
         "body": "REPORT-${1:class} = ${2:stanza_name1}, ${3:stanza_name2}"
         "description": "Used for creating extracted fields (search-time field extractions) that reference one or more transforms.conf stanzas."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "EXTRACT-<class> = <regexp>[ in <field>]":
+        "prefix": "extract"
+        "body": "EXTRACT-${1:class} = ${2}"
+        "description": "Used to create extracted fields (search-time field extractions) that do not reference transforms.conf stanzas."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "KV_MODE = [none|auto|auto_escaped|multi|json|xml]":
+        "prefix": "kv_mode"
+        "body": "KV_MODE = ${1:auto}"
+        "description": "Used for search-time field extractions only. Specifies the field/value extraction mode for the data. Candidate values are [none|auto|auto_escaped|multi|json|xml]."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "MATCH_LIMIT = <int:100000>":
+        "prefix": "match_limit"
+        "body": "MATCH_LIMIT = ${1:100000}"
+        "description": "Only set in props.conf for EXTRACT type field extractions. For REPORT and TRANSFORMS field extractions, set this in transforms.conf. Limits the amount of resources that will be spent by PCRE when running patterns that will not match."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "AUTO_KV_JSON = <bool:true>":
+        "prefix": "auto_kv_json"
+        "body": "AUTO_KV_JSON = ${1:true}"
+        "description": "Used for search-time field extractions only. Specifies whether to try json extraction automatically."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "KV_TRIM_SPACES = <bool:true>":
+        "prefix": "kv_trim_spaces"
+        "body": "KV_TRIM_SPACES = ${1:true}"
+        "description": "Modifies the behavior of KV_MODE when set to auto, and auto_escaped."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "CHECK_FOR_HEADER = <bool:false>":
+        "prefix": "check_for_header"
+        "body": "CHECK_FOR_HEADER = ${1:false}"
+        "description": "Used for index-time field extractions only. Set to true to enable header-based field extraction for a file."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "FIELDALIAS-<class>":
+        "prefix": "fieldalias"
+        "body": "FIELDALIAS-${1:class} = ${2:orig_field_name} AS ${3:new_field_name}"
+        "description": "Use this to apply aliases to a field. The original field is not removed. This just means that the original field can be searched on using any of its aliases."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "EVAL-<fieldname> = <eval statement>":
+        "prefix": "eval"
+        "body": "EVAL-${1:fieldname} = ${2}"
+        "description": "Use this to automatically run the <eval statement> and assign the value of the output to <fieldname>. This creates a \"calculated field.\""
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "LOOKUP-<class>":
+        "prefix": "lookup"
+        "body": "LOOKUP-${1:class} = ${2:$TRANSFORM_STANZA} ${3:match_field} AS ${4:match_field_in_event} OUTPUT ${5:output_field} AS ${6:output_field_in_event}"
+        "description": "At search time, identifies a specific lookup table and describes how that lookup table should be applied to events."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "SEDCMD-<class> = <sed script>":
+        "prefix": "sedcmd"
+        "body": "SEDCMD-<${1:class}> = ${2}"
+        "description": "Only used at index time. Commonly used to anonymize incoming data at index time, such as credit card or social security numbers. For more information, search the online documentation for \"anonymize data.\""
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "SEDCMD:replace":
+        "prefix": "replace"
+        "body": "replace － s/${1:regex}/${2:replacement}/${3:flags}"
+        "description": "regex is a perl regular expression (optionally containing capturing groups). replacement is a string to replace the regex match. Use \\n for back references, where \"n\" is a single digit. flags can be either: g to replace all matches, or a number to replace a specified match."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "SEDCMD:substitute":
+        "prefix": "substitute"
+        "body": "substitute － y/${1:string1}/${2:string2}/"
+        "description": "substitutes the string1[i] with string2[i]"
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "NO_BINARY_CHECK = <bool:false>":
+        "prefix": "no_binary_check"
+        "body": "NO_BINARY_CHECK = ${1:false}"
+        "description": "When set to true, Splunk processes binary files."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "detect_trailing_nulls = <string>":
+        "prefix": "detect_trailing_nulls"
+        "body": "detect_trailing_nulls = ${1:false}"
+        "description": "This feature was introduced to work around programs which foolishly preallocate their log files with nulls and fill in data later. The well-known case is Internet Information Server. Defaults to false on *nix, true on windows. Candidate values are [auto|true|false]"
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "PREFIX_SOURCETYPE = <bool:true>":
+        "prefix": "prefix_sourcetype"
+        "body": "PREFIX_SOURCETYPE = ${1:true}"
+        "description": "Determines the source types that are given to files smaller than 100
+  lines, and are therefore not classifiable."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "rename = <string>":
+        "prefix": "rename"
+        "body": "rename = ${1}"
+        "description": "With renaming, you can search for the [<sourcetype>] with
+  sourcetype=<string>."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "invalid_cause = <string>":
+        "prefix": "invalid_cause"
+        "body": "invalid_cause = ${1}"
+        "description": "If invalid_cause is set, the Tailing code (which handles uncompressed logfiles) will not read the data, but hand it off to other components or throw an error."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "force_local_processing = <bool:false>":
+        "prefix": "force_local_processing"
+        "body": "force_local_processing = ${1:false}"
+        "description": "Forces a universal forwarder to process all data tagged with this sourcetype locally before forwarding it to the indexers."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "unarchive_cmd = <string>":
+        "prefix": "unarchive_cmd"
+        "body": "unarchive_cmd = ${1}"
+        "description": "Only called if invalid_cause is set to \"archive\". This field is only valid on [source::<source>] stanzas. <string> specifies the shell command to run to extract an archived source. Must be a shell command that takes input on stdin and produces output on stdout."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "unarchive_sourcetype = <string>":
+        "prefix": "unarchive_sourcetype"
+        "body": "unarchive_sourcetype = ${1}"
+        "description": "Sets the source type of the contents of the matching archive file. Use
+  this field instead of the sourcetype field to set the source type of
+  archive files that have the following extensions: gz, bz, bz2, Z."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "LEARN_SOURCETYPE = <bool:true>":
+        "prefix": "learn_sourcetype"
+        "body": "LEARN_SOURCETYPE = ${1:true}"
+        "description": "Determines whether learning of known or unknown sourcetypes is enabled."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "LEARN_MODEL = <bool:true>":
+        "prefix": "learn_model"
+        "body": "LEARN_MODEL = ${1:true}"
+        "description": "For known source types, the file classifier adds a model file to the
+  learned directory."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "maxDist = <int:300>":
+        "prefix": "maxDist"
+        "body": "maxDist = ${1:300}"
+        "description": "Determines how different a source type model may be from the current file."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "MORE_THAN_<int> = <regexp>":
+        "prefix": "more_than"
+        "body": "MORE_THAN_${1} = ${2}"
+        "description": "This setting applies at input time, when data is first read by Splunk, such as on a forwarder."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "LESS_THAN_<int> = <regexp>":
+        "prefix": "less_than"
+        "body": "LESS_THAN_${1} = ${2}"
+        "description": "This setting applies at input time, when data is first read by Splunk, such as on a forwarder."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "ANNOTATE_PUNCT = <bool:true>":
+        "prefix": "annotate_punct"
+        "body": "ANNOTATE_PUNCT = ${1:true}"
+        "description": "Determines whether to index a special token starting with \"punct::\"."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "HEADER_MODE = <string>":
+        "prefix": "header_mode"
+        "body": "HEADER_MODE = ${1}"
+        "description": "Determines whether to use the inline ***SPLUNK*** directive to rewrite index-time fields. Candidate values are [<empty>|always|firstline|none]"
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "description = <string>":
+        "prefix": "description"
+        "body": "description = ${1}"
+        "description": "Field used to describe the sourcetype. Does not affect indexing behavior."
+        "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
+
+    "category = <string>":
+        "prefix": "category"
+        "body": "category = ${1}"
+        "description": "Field used to classify sourcetypes for organization in the front end. Case sensitive. Does not affect indexing behavior."
         "descriptionMoreURL": "http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf"
